@@ -25,12 +25,11 @@ jobs:
         env:
           SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
 
-  sca:
+sca:
     name: SCA Scan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Run npm audit
-        run: |
-          npm install --package-lock-only
-          npm audit --audit-level=critical
+        run: npm audit --audit-level=critical
+        continue-on-error: false
